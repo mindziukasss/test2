@@ -13,7 +13,16 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('posts', function (Blueprint $table) {
+            $table->integer('count', true);
+            $table->string('id', 36)->unique('id_UNIQUE');
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->string('title');
+            $table->text('body');
+            $table->string('image')->nullable();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('posts');
     }
 }
